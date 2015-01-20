@@ -5,8 +5,6 @@ module NumberToWords
   	nums_to_words = ['', 'one','two','three','four', 'five', 'six', 'seven', 
 		'eight', 'nine', 'ten','eleven','twelve','thirteen','fourteen', 
 		'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
-		one_to_ten_in_words = ['','-one','-two','-three','-four', '-five', '-six', 
-  	'-seven', '-eight', '-nine']
 		tens_in_words = [ '','ten','twenty', 'thirty', 'forty', 'fifty', 'sixty', 
 		'seventy', 'eighty', 'ninety']
     case number
@@ -23,15 +21,15 @@ module NumberToWords
 				 	number = tens_in_words[digits[0]]
 				else
 					digits[0] = tens_in_words[digits[0]]
-					digits[1] = one_to_ten_in_words[digits[1]]
-					number = "#{digits[0]}#{digits[1]}"
+					digits[1] = nums_to_words[digits[1]]
+					number = "#{digits[0]}-#{digits[1]}"
 				end
       when 100..999
       	digits = number.to_s.split('').map{|k| k.to_i}
       	if digits[1] == 1
-      		"#{nums_to_words[digits[0]]} hundred #{nums_to_words[digits[2]-10]}"
+      		"#{nums_to_words[digits[0]]} hundred #{nums_to_words[digits[2]-10]} ".strip
       	elsif digits[1] == 0
-      		"#{nums_to_words[digits[0]]} hundred #{nums_to_words[digits[2]]}".strip
+      		"#{nums_to_words[digits[0]]} hundred #{nums_to_words[digits[2]]} ".strip
       	# if digits[1]==0 && digits[2]==0
       	# 	number = "#{nums_to_words[digits[0]]} hundred"
       	# elsif digits[2] == 0
@@ -42,38 +40,25 @@ module NumberToWords
       	# 	"#{nums_to_words[digits[0]]} hundred #{one_to_ten_in_words[digits[2]].delete('-')}" 
       	else
       		number = 
-      		"#{nums_to_words[digits[0]]} hundred #{tens_in_words[digits[1]]}#{one_to_ten_in_words[digits[2]]}".strip
+      		"#{nums_to_words[digits[0]]} hundred #{tens_in_words[digits[1]]}-#{nums_to_words[digits[2]]} ".gsub(/- /, '').strip
       	end
-
       when 1000..9999
 				digits = number.to_s.split('').map{|k| k.to_i}
-				if digits[1]==0
-					number = "#{nums_to_words[digits[0]]} thousand #{tens_in_words[digits[2]]}#{one_to_ten_in_words[digits[3]]}".strip
+				if digits[1] == 0 && digits[2] == 0
+					number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[3]]} ".strip
+				elsif digits[1] == 0 && digits[2] == 1
+					number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[3]-10]} ".strip
+				elsif digits[1] == 0
+					number = "#{nums_to_words[digits[0]]} thousand #{tens_in_words[digits[2]]}-#{nums_to_words[digits[3]]} ".gsub(/- /, '').strip
 				elsif digits[2] == 0
-					number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{tens_in_words[digits[2]]}#{one_to_ten_in_words[digits[3]]}".strip
-				 # elsif digits[2] == 0
-					# number = "#{}"
-      # # 	if digits[1]==0 && digits[2]==0 && digits[3]==0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[0]]} thousand" 
-      # # 	elsif digits[2]==0 && digits[3] == 0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred"
-      # # 	elsif digits[1]==0 && digits[3] == 0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[0]]} thousand #{tens_in_words[digits[2]]}"
-      # # 	elsif digits[1] == 0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[0]]} thousand #{tens_in_words[digits[2]-1]}#{one_to_ten_in_words[digits[3]-1].delete('-')}"
-      # # 	elsif digits[2] == 0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{one_to_ten_in_words[digits[3]-1].delete('-')}"
-      # # 	elsif digits[3] == 0
-      # # 		number = 
-      # # 		"#{nums_to_words[digits[1]]} hundred #{tens_in_words[digits[2]-1]}"
+					number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{nums_to_words[digits[3]]} ".strip
+				elsif digits[2] == 1
+		    	number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{nums_to_words[digits[3]-10]} ".strip 
         else
-          number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{tens_in_words[digits[2]]}#{one_to_ten_in_words[digits[3]]}".strip
+          number = "#{nums_to_words[digits[0]]} thousand #{nums_to_words[digits[1]]} hundred #{tens_in_words[digits[2]]}-#{nums_to_words[digits[3]]}  ".gsub(/- /, '').strip
         end
+      when 10000..99999
+
     end
   end
 end

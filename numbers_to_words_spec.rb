@@ -44,6 +44,7 @@ class NumberToWordsTest < MiniTest::Test
 
 		it "should handle one thousand to nine thousand nine hundred ninety-nine" do
 			1020.to_words.must_equal("one thousand twenty")
+			1111.to_words.must_equal("one thousand one hundred eleven")
 		  1000.to_words.must_equal("one thousand")
 		  1001.to_words.must_equal("one thousand one")
 		  1011.to_words.must_equal("one thousand eleven")
@@ -53,9 +54,9 @@ class NumberToWordsTest < MiniTest::Test
 		  1225.to_words.must_equal("one thousand two hundred twenty-five")
 		  2000.to_words.must_equal("two thousand")
 		  2356.to_words.must_equal("two thousand three hundred fifty-six")
-		  6863.to_words.must_equal("six thousand eight hundred sixty three")
-		  8864.to_words.must_equal("eight thousand eight hundred sixty four")
-		  9956.to_words.must_equal("nine thousand nine hundred fifty six")
+		  6863.to_words.must_equal("six thousand eight hundred sixty-three")
+		  8864.to_words.must_equal("eight thousand eight hundred sixty-four")
+		  9956.to_words.must_equal("nine thousand nine hundred fifty-six")
 		end
 
 		# it "should handle ten thousand to ninety nine thousand nine hundred ninety-nine" do
