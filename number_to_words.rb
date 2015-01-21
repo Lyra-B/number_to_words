@@ -10,13 +10,10 @@ module NumberToWords
     case number
     	when 0..19
     		nums = (0..19)
-				# nums.map{|k| k.to_s.to_sym}
 				numbers_one_to_nineteen = Hash[nums.to_a.zip(nums_to_words)]
 				numbers_one_to_nineteen[number]
-				#.each{|key,value| number = value if key==number}
 		  when 20..99
 				digits = number.to_s.split('').map{|k| k.to_i}
-				#binding.pry
 				if digits[1] == 0
 				 	tens_in_words[digits[0]]
 				else
@@ -45,7 +42,7 @@ module NumberToWords
       	digits = number.to_s.split('').map{|k| k.to_i}
       	thousands= [digits[0], digits[1], digits[2]].join.to_i.to_words
       	hundreds = [digits[3], digits[4],digits[5]].join.to_i.to_words
-      	"#{thousands} thousand #{hundreds}".strip
+      	"#{thousands} thousand #{hundreds}".strip  	
     end
   end
 end

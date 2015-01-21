@@ -75,7 +75,7 @@ class NumberToWordsTest < MiniTest::Test
 			100001.to_words.must_equal("one hundred thousand one")
 			100011.to_words.must_equal("one hundred thousand eleven")
 			100111.to_words.must_equal("one hundred thousand one hundred eleven")
-			101111.to_words.must_equal("ten thousand one")
+			101111.to_words.must_equal("one hundred one thousand one hundred eleven")
 		end
 
 	end
