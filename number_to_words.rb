@@ -42,7 +42,9 @@ module NumberToWords
       	digits = number.to_s.split('').map{|k| k.to_i}
       	thousands= [digits[0], digits[1], digits[2]].join.to_i.to_words
       	hundreds = [digits[3], digits[4],digits[5]].join.to_i.to_words
-      	"#{thousands} thousand #{hundreds}".strip  	
+      	"#{thousands} thousand #{hundreds}".strip 
+      when 1000000
+      	"one million"
     end
   end
 end
